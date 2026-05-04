@@ -6,10 +6,23 @@ int main(int argc, char ** argv)
 {
     size_t count = 0;
     std::string line;
+    double sum = 0;
     while (std::getline(std::cin, line))
     {
-        count += 1;
+        try {
+            double price = std::stod(line);
+            sum += price;
+            count++;
+        } catch (const std::exception& e) {
+        // вывели некорректные данные
+        std::cerr << "price\t" << line << "\n";
+        }
     }
-    std::cout << count << std::endl;
+    
+    if (count > 0) {
+        double mean = sum / count; // среднее
+        std::cout << mean << "\n";
+    }
+    
     return 0;
 }
